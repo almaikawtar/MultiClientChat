@@ -31,7 +31,7 @@ The following screenshots illustrate the main interfaces of the application.
 
 ## Demo
 
-[Watch the 3-minute project demonstration](PASTE_VIDEO_LINK_HERE)
+[Watch the 3-minute project demonstration](docs/demo/video.mp4)
 
 The demonstration covers the application architecture, server startup, client connections, real-time messaging, active user monitoring, and read-only mode.
 
