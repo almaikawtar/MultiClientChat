@@ -1,0 +1,19 @@
+@startuml
+title Use Cases
+left to right direction
+actor User
+actor Observer as "Read-only user"
+actor Admin as "Server operator"
+rectangle "Chat client" {
+  User --> (Join with username)
+  User --> (Send message)
+  User --> (List active users: allUsers)
+  User --> (Leave: end / bye / LEAVE)
+  Observer --> (Join without username)
+  Observer --> (Read messages)
+}
+rectangle "Chat server" {
+  Admin --> (Start / stop server)
+  Admin --> (Monitor users and log)
+}
+@enduml

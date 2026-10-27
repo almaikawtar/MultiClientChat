@@ -1,0 +1,77 @@
+@startuml
+title Class Diagram - Multi-Client Chat (Model / View separation)
+skinparam classAttributeIconSize 0
+
+package "TCPServer" {
+  class TCPServer <<launcher>> { +main(args) }
+  package "view" {
+    class ServerApp { -users : ObservableList
+      -colors : Map
+      +start(Stage) }
+  }
+  package "model" {
+    interface ServerListener { +onLog(msg)
+      +onUserJoined(user)
+      +onUserLeft(user) }
+    class ChatServer { -clients : List<ClientHandler>
+      +start()
+      +stop()
+      ~register(handler, name)
+      ~broadcastChat(sender, text)
+      ~broadcast(line)
+      ~remove(handler)
+      ~userNames() }
+    class ClientHandler <<virtual thread>> { -username
+      +run()
+      ~send(line)
+      ~isReadOnly() }
+    class ServerConfig <<record>> { host
+      port
+      +load() }
+    class "Protocol" as SP { +build()
+      +parse() }
+  }
+}
+
+package "TCPClient" {
+  class TCPClient <<launcher>> { +main(args) }
+  package "client.view" {
+    class ClientApp { +start(Stage)
+      -showLogin()
+      -showChat() }
+  }
+  package "client.model" {
+    interface ChatListener { +onMessage()
+      +onUsers()
+      +onDisconnected() }
+    class ChatClient { -socket
+      +connect(host, port, user)
+      +startListening()
+      +handleInput(text)
+      +disconnect() }
+    class ClientConfig <<record>> { host
+      port
+      +fromArgs() }
+    class "Protocol" as CP { +build()
+      +parse() }
+  }
+}
+
+TCPServer ..> ServerApp : launches
+ServerApp ..|> ServerListener
+ServerApp --> ChatServer : uses
+ServerApp ..> ServerConfig
+ChatServer o-- "0..*" ClientHandler
+ChatServer --> ServerListener : notifies
+ChatServer ..> SP
+ClientHandler ..> SP
+
+TCPClient ..> ClientApp : launches
+ClientApp --> ChatClient : uses
+ClientApp ..|> ChatListener : (anonymous)
+ChatClient --> ChatListener : notifies
+ClientApp ..> ClientConfig
+ChatClient ..> CP
+
+ClientHandler ..> ChatClient : TCP (text protocol) <<link>>
+@enduml

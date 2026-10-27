@@ -1,0 +1,30 @@
+@startuml
+title Sequence - join, chat, allUsers, leave
+actor Alice
+participant "ClientApp (view)" as V
+participant ChatClient as C
+participant ClientHandler as H
+participant ChatServer as S
+participant "ServerApp (view)" as SV
+
+Alice -> V : username + JOIN
+V -> C : connect(host, port, "Alice")
+C -> H : HELLO|Alice
+H -> S : register()
+H --> C : OK
+S -> SV : onLog("Welcome Alice") / onUserJoined
+V -> C : startListening()
+Alice -> V : type message + Enter
+V -> C : handleInput(text)
+C -> H : MSG|text
+H -> S : broadcastChat()
+S --> C : CHAT|[hh:mm:ss] Alice: text   (to all clients)
+Alice -> V : "allUsers"
+C -> H : ALLUSERS
+H --> C : USERS|Alice,Bob
+Alice -> V : "bye" / LEAVE
+C -> H : LEAVE
+H --> C : BYE
+H -> S : remove()
+S -> SV : onUserLeft("Alice")
+@enduml

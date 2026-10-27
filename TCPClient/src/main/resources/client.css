@@ -1,0 +1,12 @@
+.root { -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; -fx-font-size: 13px; -fx-background-color: #f4f6fa; }
+.title { -fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1f3a5f; }
+.error { -fx-text-fill: #c0392b; }
+.online { -fx-text-fill: #1e8449; -fx-font-weight: bold; }
+.user { -fx-text-fill: #1f3a5f; -fx-font-weight: bold; }
+.readonly { -fx-background-color: #f5b041; -fx-text-fill: #4a2c00; -fx-font-weight: bold; -fx-padding: 3 10; -fx-background-radius: 10; }
+.text-area { -fx-background-radius: 6; }
+.button { -fx-background-color: #1f3a5f; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; }
+.button:hover { -fx-background-color: #2c5282; }
+.button:disabled { -fx-opacity: 0.5; }
+.button.leave { -fx-background-color: #c0392b; }
+.button.leave:hover { -fx-background-color: #a93226; }
