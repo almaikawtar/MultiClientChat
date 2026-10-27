@@ -330,10 +330,10 @@ The UML diagrams document the structure, deployment, and communication flow of t
 
 | Diagram | Description |
 |---|---|
-| [Class Diagram](docs/class-diagram.png) | Classes, interfaces, attributes, methods, and relationships. |
-| [Deployment Diagram](docs/deployment-diagram.png) | Server and client nodes and their TCP connection. |
-| [Sequence Diagram](docs/sequence-diagram.png) | Message exchange between clients and the server. |
-| [Use-Case Diagram](docs/usecase-diagram.png) | Main interactions available to users. |
+| ![Class Diagram](docs/class-diagram.png) | Classes, interfaces, attributes, methods, and relationships. |
+| ![Deployment Diagram](docs/deployment-diagram.png) | Server and client nodes and their TCP connection. |
+| ![Sequence Diagram](docs/sequence-diagram.png) | Message exchange between clients and the server. |
+| ![Use-Case Diagram](docs/usecase-diagram.png) | Main interactions available to users. |
 
 The PlantUML source files are also included in the `docs/` directory.
 
