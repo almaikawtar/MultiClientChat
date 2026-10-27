@@ -68,9 +68,9 @@ The application follows a **Client-Server architecture** with a clear separation
                  │      TCP Server      │
                  │                      │
                  │  ChatServer          │
-                 │  ClientHandler        │
-                 │  Protocol             │
-                 │  ServerApp (JavaFX)   │
+                 │  ClientHandler       │
+                 │  Protocol            │
+                 │  ServerApp (JavaFX)  │
                  └──────────┬───────────┘
                             │
                       TCP Connection
@@ -184,7 +184,7 @@ The project is developed using IntelliJ IDEA.
 Clone the repository:
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone THIS_GITHUB_REPOSITORY
 cd chat-project
 ```
 
