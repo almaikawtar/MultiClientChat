@@ -35,7 +35,19 @@ The following screenshots illustrate the main interfaces of the application.
 
 The demonstration covers the application architecture, server startup, client connections, real-time messaging, active user monitoring, and read-only mode.
 
+## Blog Post
 
+I wrote an article about the development process, architecture, and technical challenges
+of this project.
+
+**[Building a Multi-Client Chat Application with Java Sockets and JavaFX](YOUR_BLOG_POST_URL)**
+
+The article explores:
+- Client-server architecture using TCP.
+- Concurrent client handling with Java virtual threads.
+- Designing a simple text-based communication protocol.
+- Separating networking logic from the JavaFX interface.
+- Lessons learned during development.
 
 ## Features
 
