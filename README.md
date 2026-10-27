@@ -1,7 +1,10 @@
-# Multi-Client Chat Application (Java Sockets + JavaFX)
+# Multi-Client Chat Application
 
-Group chat over TCP: one central server distributes messages to all connected clients.
-Java 21 (virtual threads), JavaFX 21 (GridPane + CSS), Maven, IntelliJ IDEA.
+A real-time group chat application built with **Java 21, TCP Sockets, Virtual Threads, and JavaFX**.
+
+The application follows a client-server architecture: multiple clients connect to a central server, exchange messages, and view the list of active users. The server handles connections and distributes messages to the connected clients.
+
+**Mini Project 1 — Advanced Distributed Programming Paradigms**
 
 ```
 chat-project/
