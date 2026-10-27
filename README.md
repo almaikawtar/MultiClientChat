@@ -40,7 +40,7 @@ The demonstration covers the application architecture, server startup, client co
 I wrote an article about the development process, architecture, and technical challenges
 of this project.
 
-**[Building a Multi-Client Chat Application with Java Sockets and JavaFX](YOUR_BLOG_POST_URL)**
+**[Building a Multi-Client Chat Application with Java Sockets and JavaFX](https://medium.com/@almai.kawtar/exploring-java-sockets-through-a-multi-client-chat-application-e300d610864a)**
 
 The article explores:
 - Client-server architecture using TCP.
