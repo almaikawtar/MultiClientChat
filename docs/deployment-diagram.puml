@@ -1,16 +1,26 @@
 @startuml
 title Deployment Diagram
-node "Server machine\n(JVM 21)" as srv {
-  artifact "TCPServer.jar" as sj
-  artifact "config.properties" as sc
-  component "ChatServer\n(virtual thread per client)" as cs
-}
-node "Client machine A\n(JVM 21)" as a { artifact "TCPClient.jar" as aj }
-node "Client machine B\n(JVM 21)" as b { artifact "TCPClient.jar" as bj }
-node "Client machine N\n(JVM 21)" as n { artifact "TCPClient.jar" as nj }
 
-aj -- cs : TCP/IP  host:3000
-bj -- cs : TCP/IP  host:3000
-nj -- cs : TCP/IP  host:3000
-sc ..> cs : loaded at runtime
+node "Server machine (JVM 21)" as ServerNode {
+  artifact "TCPServer.jar" as ServerJar
+  artifact "config.properties" as ServerConfigFile
+  component "ChatServer (virtual thread per client)" as ChatServerComp
+}
+
+node "Client machine A (JVM 21)" as ClientA {
+  artifact "TCPClient.jar" as ClientJarA
+}
+
+node "Client machine B (JVM 21)" as ClientB {
+  artifact "TCPClient.jar" as ClientJarB
+}
+
+node "Client machine N (JVM 21)" as ClientN {
+  artifact "TCPClient.jar" as ClientJarN
+}
+
+ClientJarA -- ChatServerComp : TCP/IP port 3000
+ClientJarB -- ChatServerComp : TCP/IP port 3000
+ClientJarN -- ChatServerComp : TCP/IP port 3000
+ServerConfigFile ..> ChatServerComp : loaded at startup
 @enduml

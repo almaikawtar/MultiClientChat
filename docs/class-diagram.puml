@@ -1,59 +1,90 @@
 @startuml
 title Class Diagram - Multi-Client Chat (Model / View separation)
 skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
 
-package "TCPServer" {
-  class TCPServer <<launcher>> { +main(args) }
-  package "view" {
-    class ServerApp { -users : ObservableList
-      -colors : Map
-      +start(Stage) }
+package "Server application" {
+  class TCPServer <<launcher>> {
+    +main(args)
   }
-  package "model" {
-    interface ServerListener { +onLog(msg)
+
+  package "server.view" {
+    class ServerApp {
+      -users : ObservableList
+      -colors : Map
+      +start(Stage)
+    }
+  }
+
+  package "server.model" {
+    interface ServerListener {
+      +onLog(msg)
       +onUserJoined(user)
-      +onUserLeft(user) }
-    class ChatServer { -clients : List<ClientHandler>
+      +onUserLeft(user)
+    }
+    class ChatServer {
+      -clients : List
       +start()
       +stop()
       ~register(handler, name)
       ~broadcastChat(sender, text)
       ~broadcast(line)
       ~remove(handler)
-      ~userNames() }
-    class ClientHandler <<virtual thread>> { -username
+      ~userNames()
+    }
+    class ClientHandler <<virtual thread>> {
+      -username : String
       +run()
       ~send(line)
-      ~isReadOnly() }
-    class ServerConfig <<record>> { host
+      ~isReadOnly()
+    }
+    class ServerConfig <<record>> {
+      host
       port
-      +load() }
-    class "Protocol" as SP { +build()
-      +parse() }
+      +load()
+    }
+    class ServerProtocol {
+      +build()
+      +parse()
+    }
   }
 }
 
-package "TCPClient" {
-  class TCPClient <<launcher>> { +main(args) }
-  package "client.view" {
-    class ClientApp { +start(Stage)
-      -showLogin()
-      -showChat() }
+package "Client application" {
+  class TCPClient <<launcher>> {
+    +main(args)
   }
+
+  package "client.view" {
+    class ClientApp {
+      +start(Stage)
+      -showLogin()
+      -showChat()
+    }
+  }
+
   package "client.model" {
-    interface ChatListener { +onMessage()
+    interface ChatListener {
+      +onMessage()
       +onUsers()
-      +onDisconnected() }
-    class ChatClient { -socket
+      +onDisconnected()
+    }
+    class ChatClient {
+      -socket : Socket
       +connect(host, port, user)
       +startListening()
       +handleInput(text)
-      +disconnect() }
-    class ClientConfig <<record>> { host
+      +disconnect()
+    }
+    class ClientConfig <<record>> {
+      host
       port
-      +fromArgs() }
-    class "Protocol" as CP { +build()
-      +parse() }
+      +fromArgs()
+    }
+    class ClientProtocol {
+      +build()
+      +parse()
+    }
   }
 }
 
@@ -63,15 +94,15 @@ ServerApp --> ChatServer : uses
 ServerApp ..> ServerConfig
 ChatServer o-- "0..*" ClientHandler
 ChatServer --> ServerListener : notifies
-ChatServer ..> SP
-ClientHandler ..> SP
+ChatServer ..> ServerProtocol
+ClientHandler ..> ServerProtocol
 
 TCPClient ..> ClientApp : launches
 ClientApp --> ChatClient : uses
-ClientApp ..|> ChatListener : (anonymous)
+ClientApp ..|> ChatListener
 ChatClient --> ChatListener : notifies
 ClientApp ..> ClientConfig
-ChatClient ..> CP
+ChatClient ..> ClientProtocol
 
-ClientHandler ..> ChatClient : TCP (text protocol) <<link>>
+ClientHandler .. ChatClient : TCP text protocol
 @enduml

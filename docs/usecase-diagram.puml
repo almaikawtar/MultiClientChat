@@ -1,19 +1,31 @@
 @startuml
 title Use Cases
 left to right direction
+
 actor User
-actor Observer as "Read-only user"
-actor Admin as "Server operator"
+actor "Read-only user" as Observer
+actor "Server operator" as Admin
+
 rectangle "Chat client" {
-  User --> (Join with username)
-  User --> (Send message)
-  User --> (List active users: allUsers)
-  User --> (Leave: end / bye / LEAVE)
-  Observer --> (Join without username)
-  Observer --> (Read messages)
+  usecase "Join with username" as UC1
+  usecase "Send message" as UC2
+  usecase "List active users (allUsers)" as UC3
+  usecase "Leave (end, bye or LEAVE button)" as UC4
+  usecase "Join without username" as UC5
+  usecase "Read messages" as UC6
 }
+
 rectangle "Chat server" {
-  Admin --> (Start / stop server)
-  Admin --> (Monitor users and log)
+  usecase "Start or stop server" as UC7
+  usecase "Monitor users and log" as UC8
 }
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+Observer --> UC5
+Observer --> UC6
+Admin --> UC7
+Admin --> UC8
 @enduml

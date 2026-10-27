@@ -1,30 +1,34 @@
 @startuml
 title Sequence - join, chat, allUsers, leave
-actor Alice
-participant "ClientApp (view)" as V
-participant ChatClient as C
-participant ClientHandler as H
-participant ChatServer as S
-participant "ServerApp (view)" as SV
 
-Alice -> V : username + JOIN
-V -> C : connect(host, port, "Alice")
-C -> H : HELLO|Alice
-H -> S : register()
-H --> C : OK
-S -> SV : onLog("Welcome Alice") / onUserJoined
-V -> C : startListening()
-Alice -> V : type message + Enter
-V -> C : handleInput(text)
-C -> H : MSG|text
-H -> S : broadcastChat()
-S --> C : CHAT|[hh:mm:ss] Alice: text   (to all clients)
-Alice -> V : "allUsers"
-C -> H : ALLUSERS
-H --> C : USERS|Alice,Bob
-Alice -> V : "bye" / LEAVE
-C -> H : LEAVE
-H --> C : BYE
-H -> S : remove()
-S -> SV : onUserLeft("Alice")
+actor Alice
+participant "ClientApp (view)" as ClientView
+participant ChatClient as Client
+participant ClientHandler as Handler
+participant ChatServer as Server
+participant "ServerApp (view)" as ServerView
+
+Alice -> ClientView : enter username and click JOIN
+ClientView -> Client : connect(host, port, username)
+Client -> Handler : HELLO Alice
+Handler -> Server : register()
+Handler --> Client : OK
+Server -> ServerView : onLog Welcome Alice, onUserJoined
+ClientView -> Client : startListening()
+
+Alice -> ClientView : type message and press Enter
+ClientView -> Client : handleInput(text)
+Client -> Handler : MSG text
+Handler -> Server : broadcastChat()
+Server --> Client : CHAT time, user, text (sent to all clients)
+
+Alice -> ClientView : type allUsers
+Client -> Handler : ALLUSERS
+Handler --> Client : USERS list of active users
+
+Alice -> ClientView : type bye or click LEAVE
+Client -> Handler : LEAVE
+Handler --> Client : BYE
+Handler -> Server : remove()
+Server -> ServerView : onUserLeft(Alice)
 @enduml
