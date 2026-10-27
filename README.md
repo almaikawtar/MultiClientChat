@@ -13,7 +13,7 @@ The application follows a client-server architecture: multiple clients connect t
 | **Instructor** | El Habib Nfaoui |
 | **University** | Al Akhawayn University in Ifrane |
 
----
+
 
 ## Screenshots
 
@@ -35,7 +35,7 @@ The following screenshots illustrate the main interfaces of the application.
 
 The demonstration covers the application architecture, server startup, client connections, real-time messaging, active user monitoring, and read-only mode.
 
----
+
 
 ## Features
 
@@ -57,7 +57,7 @@ The demonstration covers the application architecture, server startup, client co
 - **Activity logging:** Display server events such as startup, client connections, user departures, and incoming messages.
 - **Runtime configuration:** Load the server IP address and port from a configuration file.
 
----
+
 
 ## Architecture
 
@@ -151,7 +151,7 @@ chat-project/
     └── usecase-diagram.png
 ```
 
----
+
 
 ## Technologies
 
@@ -165,7 +165,7 @@ chat-project/
 | IntelliJ IDEA | Development environment |
 | UML / PlantUML | Software architecture documentation |
 
----
+
 
 ## Requirements
 
@@ -177,7 +177,7 @@ Before running the application, ensure that the following are installed:
 
 The project is developed using IntelliJ IDEA.
 
----
+
 
 ## Build
 
@@ -209,7 +209,7 @@ TCPServer/target/TCPServer.jar
 TCPClient/target/TCPClient.jar
 ```
 
----
+
 
 ## Run the Application
 
@@ -239,7 +239,7 @@ Run the client command in multiple terminals or launch multiple instances of the
 
 Each client connects to the same server and participates in the shared conversation.
 
----
+
 
 ## Configuration
 
@@ -273,7 +273,7 @@ The client configuration is used when no command-line arguments are provided.
 
 To override the configuration bundled inside a JAR, place a `config.properties` file next to the JAR.
 
----
+
 
 ## Running on Multiple Computers
 
@@ -292,7 +292,7 @@ java -jar TCPClient.jar 192.168.1.20 3000
 
 Replace `192.168.1.20` with the actual server IP address.
 
----
+
 
 ## Communication Protocol
 
@@ -322,7 +322,7 @@ The client and server use protocol commands to identify messages, manage connect
 
 The exact command format and payload structure are defined in the `Protocol` classes.
 
----
+
 
 ## UML Diagrams
 
@@ -337,7 +337,7 @@ The UML diagrams document the structure, deployment, and communication flow of t
 
 The PlantUML source files are also included in the `docs/` directory.
 
----
+
 
 ## Known Limitations
 
@@ -346,7 +346,7 @@ The PlantUML source files are also included in the `docs/` directory.
 - Usernames must contain 1–20 characters and be unique (case-insensitive).
 - The application is designed for a local network demonstration and does not implement production-grade authentication.
 
----
+
 
 ## Learning Outcomes
 
